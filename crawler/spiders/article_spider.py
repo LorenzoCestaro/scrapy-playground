@@ -3,12 +3,13 @@ import scrapy
 
 class ArticleSpider(scrapy.Spider):
     name = 'article'
+    allowed_domains = ['rebekahradice.com']
 
     # Breadth-First crawling
-    custom_setting = {
-        DEPTH_PRIORITY = 1,
-        SCHEDULER_DISK_QUEUE = 'scrapy.squeues.PickleFifoDiskQueue',
-        SCHEDULER_MEMORY_QUEUE = 'scrapy.squeues.FifoMemoryQueue',
+    custom_settings = {
+        'DEPTH_PRIORITY': 1,
+        'SCHEDULER_DISK_QUEUE': 'scrapy.squeues.PickleFifoDiskQueue',
+        'SCHEDULER_MEMORY_QUEUE': 'scrapy.squeues.FifoMemoryQueue',
     }
 
     start_urls = [
