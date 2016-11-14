@@ -4,6 +4,13 @@ import scrapy
 class ArticleSpider(scrapy.Spider):
     name = 'article'
 
+    # Breadth-First crawling
+    custom_setting = {
+        DEPTH_PRIORITY = 1,
+        SCHEDULER_DISK_QUEUE = 'scrapy.squeues.PickleFifoDiskQueue',
+        SCHEDULER_MEMORY_QUEUE = 'scrapy.squeues.FifoMemoryQueue',
+    }
+
     start_urls = [
         'http://rebekahradice.com/blog/',
     ]
