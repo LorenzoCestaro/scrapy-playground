@@ -1,5 +1,5 @@
 import scrapy
-from crawler.items import ArticleItem
+from crawler.items.article import ArticleItem
 
 
 class ArticleSpider(scrapy.Spider):
