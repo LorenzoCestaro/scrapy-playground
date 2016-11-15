@@ -14,7 +14,7 @@ class ArticleSpider(scrapy.Spider):
         for article in response.css('article'):
             item = ArticleItem()
             item['url'] = response.url
-            item['content'] = article.extract_first()
+            item['content'] = article.extract()
             yield item
 
         next_pages = response.css('body a::attr(href)').extract()
