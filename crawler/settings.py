@@ -76,6 +76,7 @@ ROBOTSTXT_OBEY = True
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     'crawler.pipelines.duplicates.DuplicatesPipeline': 100,
+    'crawler.pipelines.json.JsonWritePipeline': 200,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
