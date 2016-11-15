@@ -11,10 +11,10 @@ class ArticleSpider(scrapy.Spider):
     ]
 
     def parse(self, response):
-        for article in response.css('body article'):
+        for article in response.css('article'):
             item = ArticleItem()
             item['url'] = response.url
-            item['content'] = article
+            item['content'] = article.extract_first()
             yield item
 
         next_pages = response.css('body a::attr(href)').extract()
