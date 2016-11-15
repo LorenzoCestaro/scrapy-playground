@@ -15,7 +15,7 @@ SPIDER_MODULES = ['crawler.spiders']
 NEWSPIDER_MODULE = 'crawler.spiders'
 
 # Crawling depth
-# DEPTH_LIMIT = 10
+DEPTH_LIMIT = 10
 
 # Breadth-First crawling
 DEPTH_PRIORITY = 1,
