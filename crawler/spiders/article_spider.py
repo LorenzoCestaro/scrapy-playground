@@ -1,4 +1,5 @@
 import scrapy
+from crawler.items import article_item
 
 
 class ArticleSpider(scrapy.Spider):
@@ -18,7 +19,10 @@ class ArticleSpider(scrapy.Spider):
 
     def parse(self, response):
         for article in response.css('body article'):
-            yield {'article': article.extract()}
+            item = ArticleItem()
+            item['url'] = response.url
+            item['content'] = article
+            yield item
 
         next_pages = response.css('body a::attr(href)').extract()
         for page in next_pages:

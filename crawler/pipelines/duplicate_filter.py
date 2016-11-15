@@ -4,11 +4,11 @@ from scrapy.exceptions import DropItem
 class DuplicatesPipeline(object):
 
     def __init__(self):
-        self.ids_seen = set()
+        self.urls_seen = set()
 
     def process_item(self, item, spider):
-        if item['id'] in self.ids_seen:
-            raise DropItem("Duplicate item found: %s" % item)
+        if item['url'] in self.urls_seen:
+            raise DropItem("Duplicate url found: %s" % item['url'])
         else:
-            self.ids_seen.add(item['id'])
+            self.ids_seen.add(item['url'])
             return item
