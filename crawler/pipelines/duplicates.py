@@ -10,5 +10,5 @@ class DuplicatesPipeline(object):
         if item['url'] in self.urls_seen:
             raise DropItem("Duplicate url found: %s" % item['url'])
         else:
-            self.ids_seen.add(item['url'])
+            self.urls_seen.add(item['url'])
             return item
