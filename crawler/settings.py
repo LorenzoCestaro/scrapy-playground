@@ -25,11 +25,21 @@ DEPTH_PRIORITY = 1
 SCHEDULER_DISK_QUEUE = 'scrapy.squeues.PickleFifoDiskQueue'
 SCHEDULER_MEMORY_QUEUE = 'scrapy.squeues.FifoMemoryQueue'
 
-# Crawl responsibly by identifying yourself (and your website) on the user-agent
-# USER_AGENT = 'crawler (+http://www.yourdomain.com)'
-
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
+
+# Configure item pipelines
+ITEM_PIPELINES = {
+    'crawler.pipelines.duplicates.DuplicatesPipeline': 100,
+}
+
+# Feed export Configure
+FEED_FORMAT = 'csv'
+FEED_EXPORT_FIELDS = ['content']
+FEED_URI = '/data/export.csv'
+
+# Crawl responsibly by identifying yourself (and your website) on the user-agent
+# USER_AGENT = 'crawler (+http://www.yourdomain.com)'
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 # CONCURRENT_REQUESTS = 32
@@ -71,13 +81,6 @@ ROBOTSTXT_OBEY = True
 # EXTENSIONS = {
 #     'scrapy.extensions.telnet.TelnetConsole': None,
 # }
-
-# Configure item pipelines
-# See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
-    'crawler.pipelines.duplicates.DuplicatesPipeline': 100,
-    'crawler.pipelines.json.JsonWritePipeline': 200,
-}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
