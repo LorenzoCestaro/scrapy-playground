@@ -14,6 +14,9 @@ BOT_NAME = 'crawler'
 SPIDER_MODULES = ['crawler.spiders']
 NEWSPIDER_MODULE = 'crawler.spiders'
 
+# Log settings
+LOG_LEVEL = 'WARNING'
+
 # Crawling depth
 DEPTH_LIMIT = 10
 
