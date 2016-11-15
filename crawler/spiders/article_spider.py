@@ -1,17 +1,10 @@
 import scrapy
-from crawler.items import article_item
+from crawler.items import ArticleItem
 
 
 class ArticleSpider(scrapy.Spider):
     name = 'article'
     allowed_domains = ['rebekahradice.com']
-
-    # Breadth-First crawling
-    custom_settings = {
-        'DEPTH_PRIORITY': 1,
-        'SCHEDULER_DISK_QUEUE': 'scrapy.squeues.PickleFifoDiskQueue',
-        'SCHEDULER_MEMORY_QUEUE': 'scrapy.squeues.FifoMemoryQueue',
-    }
 
     start_urls = [
         'http://rebekahradice.com/blog/',
