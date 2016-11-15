@@ -18,9 +18,9 @@ NEWSPIDER_MODULE = 'crawler.spiders'
 DEPTH_LIMIT = 10
 
 # Breadth-First crawling
-DEPTH_PRIORITY = 1,
-SCHEDULER_DISK_QUEUE = 'scrapy.squeues.PickleFifoDiskQueue',
-SCHEDULER_MEMORY_QUEUE = 'scrapy.squeues.FifoMemoryQueue',
+DEPTH_PRIORITY = 1
+SCHEDULER_DISK_QUEUE = 'scrapy.squeues.PickleFifoDiskQueue'
+SCHEDULER_MEMORY_QUEUE = 'scrapy.squeues.FifoMemoryQueue'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = 'crawler (+http://www.yourdomain.com)'
@@ -72,7 +72,7 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'crawler.pipelines.duplicate_filter': 100,
+    'crawler.pipelines.DuplicatesPipeline.DuplicatesPipeline': 100,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
