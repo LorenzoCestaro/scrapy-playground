@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+# Comment for testing mutiple remote push
+
 # Scrapy settings for crawler project
 #
 # For simplicity, this file contains only settings considered important or
