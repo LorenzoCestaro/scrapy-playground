@@ -30,7 +30,7 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 ITEM_PIPELINES = {
-    'crawler.pipelines.duplicates.DuplicatesPipeline': 100,
+    # 'crawler.pipelines.duplicates.DuplicatesPipeline': 100,
     'crawler.pipelines.exporter.CsvExportPipeline': 200,
 }
 
