@@ -1,17 +1,16 @@
 import scrapy
 from crawler.items.article import ArticleItem
+from scrapy.linkextractors import LinkExtractor, IGNORED_EXTENSIONS
 
 
 class ArticleSpider(scrapy.Spider):
     name = 'article'
     allowed_domains = [
-        'socialmedia.biz',
-        'www.leveragesocialmedia.com',
+        'mashable.com',
     ]
 
     start_urls = [
-        'http://www.socialmedia.biz/',
-        'http://www.leveragesocialmedia.com/',
+        'http://mashable.com/',
     ]
 
     def parse(self, response):
@@ -21,7 +20,11 @@ class ArticleSpider(scrapy.Spider):
             item['content'] = article.extract()
             yield item
 
-        next_pages = response.css('body a::attr(href)').extract()
-        for page in next_pages:
-            page = response.urljoin(page)
-            yield scrapy.Request(page, callback=self.parse)
+        le = LinkExtractor(
+            deny_extensions=IGNORED_EXTENSIONS,
+            unique=True
+        )
+
+        links = le.extract_links(response)
+        for link in links:
+            yield scrapy.Request(link.url, callback=self.parse)
