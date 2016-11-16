@@ -4,10 +4,14 @@ from crawler.items.article import ArticleItem
 
 class ArticleSpider(scrapy.Spider):
     name = 'article'
-    allowed_domains = ['rebekahradice.com']
+    allowed_domains = [
+        'socialmedia.biz',
+        'www.leveragesocialmedia.com',
+    ]
 
     start_urls = [
-        'http://rebekahradice.com/blog/',
+        'http://www.socialmedia.biz/',
+        'http://www.leveragesocialmedia.com/',
     ]
 
     def parse(self, response):

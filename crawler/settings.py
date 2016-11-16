@@ -15,7 +15,7 @@ SPIDER_MODULES = ['crawler.spiders']
 NEWSPIDER_MODULE = 'crawler.spiders'
 
 # Log settings
-LOG_LEVEL = 'WARNING'
+LOG_LEVEL = 'INFO'
 
 # Crawling depth
 DEPTH_LIMIT = 10
@@ -31,12 +31,8 @@ ROBOTSTXT_OBEY = True
 # Configure item pipelines
 ITEM_PIPELINES = {
     'crawler.pipelines.duplicates.DuplicatesPipeline': 100,
+    'crawler.pipelines.exporter.CsvExportPipeline': 200,
 }
-
-# Feed export Configure
-FEED_FORMAT = 'csv'
-FEED_EXPORT_FIELDS = ['content']
-FEED_URI = '/data/export.csv'
 
 # Disable cookies (enabled by default)
 COOKIES_ENABLED = False
