@@ -6,11 +6,21 @@ from scrapy.linkextractors import LinkExtractor, IGNORED_EXTENSIONS
 class ArticleSpider(scrapy.Spider):
     name = 'article'
     allowed_domains = [
-        'mashable.com',
+        'socialnetworking-weblog.com',
+        'blogster.com',
+        'sociableblog.com',
+        'networkweaving.com/blog',
+        'blogs.alianzo.com/socialnetworks',
+        'rotorblog.com',
     ]
 
     start_urls = [
-        'http://mashable.com/',
+        'http://www.socialnetworking-weblog.com/',
+        'http://blogster.com/',
+        'http://www.sociableblog.com/',
+        'http://www.networkweaving.com/blog/',
+        'http://blogs.alianzo.com/socialnetworks/',
+        'http://www.rotorblog.com/',
     ]
 
     def parse(self, response):
