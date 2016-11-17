@@ -15,7 +15,7 @@ SPIDER_MODULES = ['crawler.spiders']
 NEWSPIDER_MODULE = 'crawler.spiders'
 
 # Log settings
-LOG_LEVEL = 'INFO'
+LOG_LEVEL = 'DEBUG'
 
 # Crawling depth
 DEPTH_LIMIT = 10
@@ -36,6 +36,9 @@ ITEM_PIPELINES = {
 
 # Disable cookies (enabled by default)
 COOKIES_ENABLED = False
+
+# Disable s3 access configuration
+DOWNLOAD_HANDLERS = {'s3': None}
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = 'crawler (+http://www.yourdomain.com)'
