@@ -22,7 +22,7 @@ class CsvExportPipeline(object):
     def process_item(self, item, spider):
         url = item['url']
         domain = url.split('/')[2]
-        filename = 'data/%s.csv' % domain
+        filename = '/tmp/data/%s.csv' % domain
 
         if filename not in self.outputs:
             self.outputs[filename] = {}
