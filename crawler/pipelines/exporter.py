@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from scrapy import signals
 from scrapy.exporters import CsvItemExporter
 import logging
@@ -28,12 +26,14 @@ class TxtExportPipeline(object):
     def process_item(self, item, spider):
         url = item['url']
         domain = url.split('/')[2]
-        filename = 'data/%s.txt' % domain
+        filename = '/tmp/data/%s.html' % domain
 
         if filename not in self.outputs:
             self.outputs[filename] = open(filename, 'w+')\
 
-        text = item['content'].encode('ascii', 'ignore')
+        text = item['content']
+        regex = re.compile(ur'[^\x00-\x7F]+', re.UNICODE)
+        text = re.sub(regex, ' ', text)
         text = re.sub('[\n\t\r]', '', text)
         text = re.sub('<article', '\n<article', text)
 
