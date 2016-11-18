@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import scrapy
 from crawler.items.article import ArticleItem
 from scrapy.linkextractors import LinkExtractor, IGNORED_EXTENSIONS
@@ -6,21 +8,11 @@ from scrapy.linkextractors import LinkExtractor, IGNORED_EXTENSIONS
 class ArticleSpider(scrapy.Spider):
     name = 'article'
     allowed_domains = [
-        'socialnetworking-weblog.com',
-        'blogster.com',
-        'sociableblog.com',
-        'networkweaving.com/blog',
-        'blogs.alianzo.com/socialnetworks',
-        'rotorblog.com',
+        'techcrunch.com',
     ]
 
     start_urls = [
-        'http://www.socialnetworking-weblog.com/',
-        'http://blogster.com/',
-        'http://www.sociableblog.com/',
-        'http://www.networkweaving.com/blog/',
-        'http://blogs.alianzo.com/socialnetworks/',
-        'http://www.rotorblog.com/',
+        'https://techcrunch.com',
     ]
 
     def parse(self, response):

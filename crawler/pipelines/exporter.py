@@ -1,9 +1,14 @@
+# -*- coding: utf-8 -*-
+
 from scrapy import signals
 from scrapy.exporters import CsvItemExporter
 import logging
+import os
+from parsetools import html_parse
+import re
 
 
-class CsvExportPipeline(object):
+class TxtExportPipeline(object):
 
     def __init__(self):
         self.outputs = dict()
@@ -15,22 +20,22 @@ class CsvExportPipeline(object):
         return pipeline
 
     def spider_closed(self, spider):
-        for output in self.outputs:
-            self.outputs[output]['exporter'].finish_exporting()
-            self.outputs[output]['file'].close()
+        for path, filename in self.outputs.iteritems():
+            filename.close()
+            html_parse.parse(path=path, clean=True)
+            os.remove(path)
 
     def process_item(self, item, spider):
         url = item['url']
         domain = url.split('/')[2]
-        filename = '/tmp/data/%s.csv' % domain
+        filename = 'data/%s.txt' % domain
 
         if filename not in self.outputs:
-            self.outputs[filename] = {}
-            f = open(filename, 'w+')
-            exporter = CsvItemExporter(f)
-            self.outputs[filename]['file'] = open(filename, 'w+')
-            self.outputs[filename]['exporter'] = exporter
-            exporter.start_exporting()
+            self.outputs[filename] = open(filename, 'w+')\
 
-        self.outputs[filename]['exporter'].export_item(item)
+        text = item['content'].encode('ascii', 'ignore')
+        text = re.sub('[\n\t\r]', '', text)
+        text = re.sub('<article', '\n<article', text)
+
+        self.outputs[filename].write(text)
         return item
