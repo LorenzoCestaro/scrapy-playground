@@ -1,8 +1,9 @@
+from bs4 import BeautifulSoup
 from scrapy import signals
 from scrapy.exporters import CsvItemExporter
 import logging
 import os
-from parsetools import html_parse
+from parsetools import utils
 import re
 
 
@@ -36,6 +37,11 @@ class TxtExportPipeline(object):
         text = re.sub(regex, ' ', text)
         text = re.sub('[\n\t\r]', '', text)
         text = re.sub('<article', '\n<article', text)
+        text = BeautifulSoup(text, 'lxml')
+        for script in line(['script', 'style']):
+            script.extract()
 
+        text = text.get_text()
+        text = utils.clean(text)
         self.outputs[filename].write(text)
         return item
