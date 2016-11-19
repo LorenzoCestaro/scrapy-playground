@@ -38,7 +38,7 @@ class TxtExportPipeline(object):
         text = re.sub('[\n\t\r]', '', text)
         text = re.sub('<article', '\n<article', text)
         text = BeautifulSoup(text, 'lxml')
-        for script in line(['script', 'style']):
+        for script in text(['script', 'style']):
             script.extract()
 
         text = text.get_text()
