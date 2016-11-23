@@ -40,6 +40,9 @@ COOKIES_ENABLED = False
 # Disable s3 access configuration
 DOWNLOAD_HANDLERS = {'s3': None}
 
+# Custom contextfactory for fixing openssl error
+DOWNLOADER_CLIENTCONTEXTFACTORY = 'crawler.contexts.CustomContextFactory'
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = 'crawler (+http://www.yourdomain.com)'
 
