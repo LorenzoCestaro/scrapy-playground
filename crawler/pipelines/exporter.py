@@ -10,7 +10,7 @@ import re
 class TxtExportPipeline(object):
 
     def __init__(self):
-        self.outputs = dict()
+        self.out = open('/tmp/data/insertdomain.txt', 'a')
 
     @classmethod
     def from_crawler(cls, crawler):
@@ -19,29 +19,25 @@ class TxtExportPipeline(object):
         return pipeline
 
     def spider_closed(self, spider):
-        for path, filename in self.outputs.iteritems():
-            filename.close()
-            html_parse.parse(path=path, clean=True)
-            os.remove(path)
+        self.out.close()
 
     def process_item(self, item, spider):
-        url = item['url']
-        domain = url.split('/')[2]
-        filename = '/tmp/data/%s.html' % domain
 
-        if filename not in self.outputs:
-            self.outputs[filename] = open(filename, 'w+')\
-
+        # Basic html preprocessing
         text = item['content']
         regex = re.compile(ur'[^\x00-\x7F]+', re.UNICODE)
         text = re.sub(regex, ' ', text)
-        text = re.sub('[\n\t\r]', '', text)
-        text = re.sub('<article', '\n<article', text)
+        text = re.sub('[\n\t\r]', ' ', text)
+
+        # Text extraction with bs4
         text = BeautifulSoup(text, 'lxml')
         for script in text(['script', 'style']):
             script.extract()
 
         text = text.get_text()
         text = utils.clean(text)
-        self.outputs[filename].write(text)
+
+        # Save to file
+        self.out.write(text + '\n')
+
         return item

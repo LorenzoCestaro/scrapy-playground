@@ -6,17 +6,29 @@ from scrapy.linkextractors import LinkExtractor, IGNORED_EXTENSIONS
 
 
 class ArticleSpider(scrapy.Spider):
-    name = 'article'
+    name = 'blogSpider'
     allowed_domains = [
-        'techcrunch.com',
+        'insertdomain.com',
     ]
 
     start_urls = [
-        'https://techcrunch.com',
+        'http://insertdomain.com/',
     ]
 
     def parse(self, response):
-        for article in response.css('article'):
+        for article in response.css('article').css('p'):
+            item = ArticleItem()
+            item['url'] = response.url
+            item['content'] = article.extract()
+            yield item
+
+        for article in response.css('article').css('li'):
+            item = ArticleItem()
+            item['url'] = response.url
+            item['content'] = article.extract()
+            yield item
+
+        for article in response.css('article').css('blockquote'):
             item = ArticleItem()
             item['url'] = response.url
             item['content'] = article.extract()

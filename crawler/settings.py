@@ -44,7 +44,7 @@ DOWNLOAD_HANDLERS = {'s3': None}
 DOWNLOADER_CLIENTCONTEXTFACTORY = 'crawler.contexts.CustomContextFactory'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-# USER_AGENT = 'crawler (+http://www.yourdomain.com)'
+USER_AGENT = 'crawler'
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 # CONCURRENT_REQUESTS = 32
