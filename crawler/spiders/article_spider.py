@@ -7,12 +7,13 @@ from scrapy.linkextractors import LinkExtractor, IGNORED_EXTENSIONS
 
 class ArticleSpider(scrapy.Spider):
     name = 'blogSpider'
+
     allowed_domains = [
-        'insertdomain.com',
+        'techcrunch.com',
     ]
 
     start_urls = [
-        'http://insertdomain.com/',
+        'http://techcrunch.com/',
     ]
 
     def parse(self, response):

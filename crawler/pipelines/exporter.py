@@ -8,21 +8,14 @@ import re
 
 
 class TxtExportPipeline(object):
+    def open_spider(self, spider):
+        filename = '/tmp/data/%s.txt' % spider.name
+        self.out = open(filename, 'a')
 
-    def __init__(self):
-        self.out = open('/tmp/data/insertdomain.txt', 'a')
-
-    @classmethod
-    def from_crawler(cls, crawler):
-        pipeline = cls()
-        crawler.signals.connect(pipeline.spider_closed, signals.spider_closed)
-        return pipeline
-
-    def spider_closed(self, spider):
+    def close_spider(self, spider):
         self.out.close()
 
     def process_item(self, item, spider):
-
         # Basic html preprocessing
         text = item['content']
         regex = re.compile(ur'[^\x00-\x7F]+', re.UNICODE)
